@@ -21,6 +21,13 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="Projects">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+                            <xs:element ref="Project"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
             </xs:all>
         </xs:complexType>
     </xs:element>
@@ -53,4 +60,44 @@
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
+
+    <xs:simpleType name="groupType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="REGISTERING"/>
+            <xs:enumeration value="CURRENT"/>
+            <xs:enumeration value="FINISHED"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="Group">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="type" type="groupType"/>
+                <xs:element name="Participants">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                            <xs:element ref="User"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Project">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+                <xs:element name="description" type="xs:string"/>
+                <xs:element name="Groups">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="1" maxOccurs="unbounded">
+                            <xs:element ref="Group"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
 </xs:schema>
